@@ -9,32 +9,31 @@ void change_strings(const char** str1,const char** str2)
     *str2 = buf;
 }
 
-int string_compare_function(const char* for_compare_1[], const char* for_compare_2[])
+int string_compare_function(const char* str1[], const char* str2[])
 {
-    int order = 0;
+    int element_in_str = 0;
 
-    while(*(*for_compare_1 + order) != '\0' && *(*for_compare_2 + order) != '\0')
+    while((*str1)[element_in_str] != '\0' && (*str2)[element_in_str] != '\0')
     {
         printf("Start compare\n");
-        printf("element 1st str - %c, element 2st str - %c, order %d)\n", *(*for_compare_1 + order), *(*for_compare_2 + order), order);
-        if(*(*for_compare_1 + order) == *(*for_compare_2 + order))
+        printf("element 1st str - %c, element 2st str - %c, element_in_str %d)\n", (*str1)[element_in_str], (*str2)[element_in_str], element_in_str);
+        if((*str1)[element_in_str] != (*str2)[element_in_str])
         {
-            printf("is same\n");
-            order++;
-            continue;
+            break;
         }
-        if(*(*for_compare_1 + order) > *(*for_compare_2 + order))
-        {
-            printf("change\n");
-            change_strings(for_compare_1, for_compare_2);
-            return 1;
-        }
+
         printf("is earlier\n");
-        order++;
-        
+        element_in_str++;
     }
-    printf("The end\n");
-    return 0;
+
+    if((*str1)[element_in_str] <= (*str2)[element_in_str])
+    {
+        return 0;
+    }
+
+    printf("change\n");
+    change_strings(str1, str2);
+    return 1;
 }
 
 void print_strings(const char* str[])
